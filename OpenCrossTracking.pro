@@ -24,7 +24,9 @@ SOURCES += main.cpp \
     simplehoughpupildetect.cpp \
     glintdetect.cpp \
     simpleglintdetect.cpp \
-    simplecontourpupildetect.cpp
+    simplecontourpupildetect.cpp \
+    eyetracking.cpp \
+    simpleeyetracking.cpp
 
 RESOURCES += qml.qrc
 
@@ -50,7 +52,9 @@ HEADERS += \
     simplehoughpupildetect.h \
     glintdetect.h \
     simpleglintdetect.h \
-    simplecontourpupildetect.h
+    simplecontourpupildetect.h \
+    eyetracking.h \
+    simpleeyetracking.h
 
 DISTFILES += \
     eye_casscade.xml
