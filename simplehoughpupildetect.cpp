@@ -37,6 +37,8 @@ void SimpleHoughPupilDetect::houghTransform( int kernelSize, int minDistance ,
     */
     cv::HoughCircles(temp, circles, cv::HOUGH_GRADIENT, 2,
                     minDistance, 100, 30, 40, 80);
+\
+    //cv::HoughCircles(temp, circles, cv::HOUGH_GRADIENT, 2, 10);
 
     std::cout <<  circles.size() << "s were found" << std::endl;
 
@@ -51,7 +53,7 @@ void SimpleHoughPupilDetect::selectSingleEye()
 
     for( size_t i = 0; i < circles.size(); i++ )
     {
-        std::cout << "Came here" << std::endl;
+        //std::cout << "Came here" << std::endl;
 
         // get the point, center and the radius
         cv::Vec3i c = circles[i];

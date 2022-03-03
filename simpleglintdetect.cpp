@@ -25,7 +25,7 @@ void simpleGlintDetect::detect(cv::Mat img)
     // get the point, center and the radius
     cv::Point center = cv::Point(pupilCenter[0], pupilCenter[1]);
     int radius = pupilCenter[2];
-    int sampleRadius = radius * 1.5;
+    int sampleRadius = radius * 1.5; // previous 1.5
 
     // create a mask with circle inside a box
     // this was done as below as Opencv allows only rectangle ROIs.
@@ -34,14 +34,19 @@ void simpleGlintDetect::detect(cv::Mat img)
     cv::Mat imagePart = cv::Mat::zeros(frame.size(), frame.type());
     frame.copyTo(imagePart, mask);
 
+    //cv::imshow("ROI", imagePart);
+    //cv::waitKey(10);
 
-    cv::threshold(imagePart, imagePart, 150, 255, 0);
+    cv::threshold(imagePart, imagePart, 180, 255, 0);
+
+    cv::imshow("ROI", imagePart);
+    cv::waitKey(10);
 
     // detect the contours on the binary image using cv2.CHAIN_APPROX_NONE
     std::vector<std::vector<cv::Point>> contours;
     std::vector<cv::Vec4i> hierarchy;
     cv::findContours(imagePart, contours, hierarchy, cv::RETR_TREE,
-                     cv::CHAIN_APPROX_NONE);
+                     cv::CHAIN_APPROX_SIMPLE); // prevoius cv::CHAIN_APPROX_NONE
 
     // get the moments
     std::vector<cv::Moments> mu(contours.size());
@@ -58,13 +63,13 @@ void simpleGlintDetect::detect(cv::Mat img)
     }
 
     // draw contours on the original image
-    /*
+
     cv::Mat coloredMask;
     cv::cvtColor(imagePart, coloredMask, cv::COLOR_GRAY2BGR);
     cv::drawContours(coloredMask, contours, -1, cv::Scalar(0, 255, 0), 2);
     cv::imshow("Contours drawn", coloredMask);
     cv::waitKey(5);
-    */
+
 
     // push first 4 elements to the glint centers vector
     glintCenters.clear();

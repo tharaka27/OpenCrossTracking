@@ -8,9 +8,12 @@
 #include <opencv2/videoio.hpp>
 #include "pupildetect.h"
 #include "glintdetect.h"
+#include "eyetracking.h"
 #include "simplehoughpupildetect.h"
 #include "simplecontourpupildetect.h"
 #include "simpleglintdetect.h"
+#include "simpleeyetracking.h"
+
 
 class Eye
 {
@@ -31,6 +34,7 @@ private:
     cv::CascadeClassifier eyesCascade;
     pupilDetect *simpledetect;
     simpleGlintDetect *simpleglint;
+    eyeTracking *simpletracking;
 
     cv::Vec3f pupilCenter;
     std::vector<cv::Point> glintPositions;
